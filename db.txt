@@ -4,4 +4,4 @@ dbname: practisedbss///practisedbs
 password : 
 port: 3306
 
-tablename: htmlformdata
+tablenamea: htmlformdata
