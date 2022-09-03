@@ -74,7 +74,7 @@
                     this.style.webkitTransform = "rotate(360deg)";
                     this.style.transform = "rotate(360deg)";
 
-                    alert("get");
+                    //alert("get");
                     }, false);
                     
                 </script> 
