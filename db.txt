@@ -1,0 +1,7 @@
+hostname: db4free.net
+username: samik_db
+dbname: practisedbss///practisedbs
+password : 
+port: 3306
+
+tablename: htmlformdata

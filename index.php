@@ -42,7 +42,8 @@
                 border: none;
                 cursor: pointer;
                 margin: 0;
-
+                transition: all 0.3s linear;
+                    
             }
         </style>
     </head>
@@ -67,13 +68,16 @@
             <button  name="resetsearch" id="refresh">&#x21bb;</button>
             </form>
 
-            <script>
+         <script>
 
-                document.getElementByID("refresh").addEventListener("click", function() {
-                        alert("get");
-}, false);
+                document.getElementById("refresh").addEventListener("click", function() {
+                    this.style.webkitTransform = "rotate(360deg)";
+                    this.style.transform = "rotate(360deg)";
+
+                    //alert("get");
+                    }, false);
                     
-                </script>
+                </script> 
 
         <table >
             <caption>Name list</caption>
@@ -107,7 +111,7 @@ if(isset($_POST["searchbtn"]))
 $valuesearch=$_POST["search"];
 if($valuesearch!=null)
     {
-$queryselect=mysqli_query($con,"SELECT * from htmlformdata where name= '$valuesearch'");
+$queryselect=mysqli_query($con,"SELECT * from htmlformdata where name like '%$valuesearch%'");
 // echo $   ;
 filterresult($queryselect);
     }
