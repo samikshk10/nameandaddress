@@ -1,7 +1,7 @@
 <?php   
 //$connect= mysqli_connect('localhost','root','','practisedb');
 
-$con= new mysqli('localhost','root','','practisedb');
+$con= new mysqli('db4free.net','samik_db','samik1234','practisedbss');
 $name=$_POST["name"];
 $address=$_POST["address"];
 if(($name)==null || $address==null)

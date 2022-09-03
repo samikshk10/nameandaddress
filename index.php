@@ -84,7 +84,7 @@
 </tr>
 
 <?php
-$con= new mysqli('localhost','root','','practisedb');
+$con= new mysqli('db4free.net','samik_db','samik1234','practisedbss');
 $queryselect=mysqli_query($con,"SELECT * from htmlformdata");
 $cnt = mysqli_num_rows(mysqli_query($con,"SELECT * FROM htmlformdata"));
 function filterresult($result){
