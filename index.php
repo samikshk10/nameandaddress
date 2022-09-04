@@ -124,6 +124,12 @@
 
           }
 
+          input[type=text]:focus{
+            border: 2px solid dodgerblue;
+            border-color: dodgerblue;
+            border-radius: 20px;
+          }
+
        
 
       input[type=text]::placeholder{
@@ -137,6 +143,8 @@
           .searchbutton{
         visibility:hidden;
           }
+
+          
 
       input#searchs:focus   ~ .searchbutton{
         visibility: visible;
