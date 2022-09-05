@@ -110,6 +110,8 @@
             right: 0%;
           }
 
+         
+
           input[type=text]
           {
             padding: 10px 3px;
@@ -140,76 +142,70 @@
           label{
             font-size: 18px;
           }
-          .searchbutton{
-        visibility:hidden;
-          }
 
-          
+          .searchbox {
+   position: absolute;
+   left: 50%;
+    transform:  translate(-50%,50%);
+    background: #122838;
+    height: 40px;
+    border-radius: 40px;
+    padding: 10px;
 
-      input#searchs:focus   ~ .searchbutton{
-        visibility: visible;
-        z-index:999;
-        overflow:hidden;
-           } 
+}
 
-         
 
-           .searchbutton{
-            background-color:gray;
-            border-radius: 50%;
-            width:32px;
-            height: 32px;
-            border:none;
-           }
+.searchbox:hover  .searchinput {
+    width: 240px;
+    padding: 0 6px;
+}
 
-           #searchform {
-            display: inline-block;
-            position: relative;
-        
-           }
-           
-           .searchbutton{
+.searchbox:hover  .searchbutton {
+  background: white;
+  color : #122838;
+}
 
-            position: absolute;
-            top:5px;
-            bottom:0;
-            right:6px;
-          
-           }
+.searchbox .searchinput{
+    width: 100px;
+}
 
-           .searchbox{
-            border: 2px solid black;
-            width: 300px;
-            border-radius: 20px;
-           }
+.searchbutton:hover{
+    cursor:pointer;
+}
 
-           
 
-         
 
-           input#searchs:focus   ~ .searchbox{
-       border-color: red;
-           } 
 
-           input#searchs{
-            outline:none;
-            border:none;
-            width: 200px;
-           }
 
-        .searchbox::before  .searchbutton{
-content:"";
-position: absolute;
-top:5px;
-bottom:0;
-left:0;
-z-index:99;
+.searchbutton {
+    color: white;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    border:none;
+}
 
-        }
+.searchinput {
+    border:none;
+    background: none;
+    outline:none;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
 
-        input#searchs:focus ~.searchbutton{
-            transition: all 0.5s linear;
-        }
+}
+
+
+
          
            
            
@@ -223,9 +219,9 @@ z-index:99;
     <body>
         <form action="post.php" method="post"  name="myform" enctype="multipart/form-data">
         <label for="">Name:</label>
-            <input type="text" aria-label="name" name="name" id="names" placeholder="Enter Your Name"> <br><br>
+            <input type="text" aria-label="name" name="name" id="names" placeholder="Enter Your Name" required> <br><br>
             <label for="">Address: </label>
-            <input type="text" aria-label="address" name="address" Placeholder="Enter Your Address" ><br><br>
+            <input type="text" aria-label="address" name="address" Placeholder="Enter Your Address" required><br><br>
         <button type="submit"   id="btn" class="savebtn" >Save</button>
         <button type="reset" class="savebtn resetbtn" value="Reset">Reset </button>
         </form>
@@ -235,14 +231,13 @@ z-index:99;
         <br>
 
 <form action="index.php" method="post" id="searchform">
-    <div class="searchbox">
-            <input type="text" placeholder="Search by Name" name="search" id="searchs" class="searchtext">
+    <div class="searchbox" id="searchbo">
+            <input type="search" placeholder="Search by Name" name="search" id="searchs" class="searchinput">
             <button type="submit" name="searchbtn" id="searchbtn" class="searchbutton"><i class="fa fa-search"></i></button>
-            </div>
+        </div>
+        <button  name="resetsearch" id="refresh" title="refresh">&#x21bb;</button>
 
-            <button  name="resetsearch" id="refresh" title="refresh">&#x21bb;</button>
             </form>
-
          <script>
 
                 document.getElementById("refresh").addEventListener("click", function() {
@@ -251,7 +246,7 @@ z-index:99;
 
                     //alert("get");
                     }, false);
-                    
+                 
                 </script> 
 
         <table >
@@ -260,7 +255,10 @@ z-index:99;
     <th>ID</th>
     <th>Name</th>
     <th>Address</th>
+    <th>Delete</th>
 </tr>
+
+
 
 <?php
 $con= new mysqli('db4free.net','samik_db','samik1234','practisedbss');
@@ -268,15 +266,19 @@ $queryselect=mysqli_query($con,"SELECT * from htmlformdata");
 $cnt = mysqli_num_rows(mysqli_query($con,"SELECT * FROM htmlformdata"));
 function filterresult($result){
     while($rows=mysqli_fetch_assoc($result))
-    {
-    
-      
+    {  
      ?>
      <tr>
             <td><?php echo($rows['id']) ?></td>
             <td><?php echo($rows['name']) ?></td>
             <td><?php echo($rows['address']) ?></td>
+            <td><?php echo ("<a href='delete.php?id=$rows[id]'><i class='fa fa-trash fa-lg' style='color:black'></i></a>");?></td>    
+
+            
             <?php 
+        
+          
+            
             }
     
     }
@@ -307,8 +309,6 @@ filterresult($queryselect);
     }
       else
        {
-        
-       
          ?>
          <td colspan="3">form data is empty</td>
        <?php } ?>
