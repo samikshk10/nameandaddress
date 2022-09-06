@@ -261,7 +261,8 @@
 
 
 <?php
-$con= new mysqli('db4free.net','samik_db','samik1234','practisedbss');
+include_once 'database.php';
+// $con= new mysqli('db4free.net','samik_db','samik1234','practisedbss');
 $queryselect=mysqli_query($con,"SELECT * from htmlformdata");
 $cnt = mysqli_num_rows(mysqli_query($con,"SELECT * FROM htmlformdata"));
 function filterresult($result){
@@ -289,8 +290,14 @@ $valuesearch=$_POST["search"];
 if($valuesearch!=null)
     {
 $queryselect=mysqli_query($con,"SELECT * from htmlformdata where name like '%$valuesearch%'");
+if(mysqli_num_rows($queryselect)==0)
+{
+    echo ("<tr><td colspan='4'>Search Name Not Found</td></tr>");
+}
+else{
 // echo $   ;
 filterresult($queryselect);
+}
     }
     else{
         echo("Please enter a value to search");
@@ -310,7 +317,7 @@ filterresult($queryselect);
       else
        {
          ?>
-         <td colspan="3">form data is empty</td>
+         <td colspan="4">form data is empty</td>
        <?php } ?>
       
 </tr>
