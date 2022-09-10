@@ -10,7 +10,8 @@
 
     </head>
     <body>
-        <form action="post.php" method="post"  name="myform" enctype="multipart/form-data">
+    <!-- enctype="multipart/form-data" -->
+        <form action="post.php" method="post"  name="myform">
         <label for="">Name:</label>
             <input type="text" aria-label="name" name="name" id="names" placeholder="Enter Your Name" required> <br><br>
             <label for="">Address: </label>
